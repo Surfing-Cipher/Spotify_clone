@@ -43,18 +43,35 @@ function changePauseButtonToPlay() {
   masterPlay.classList.add('fa-solid', 'fa-play');
 }
 
-//Handle play/pause click
 masterPlay.addEventListener('click', () => {
   if (audioELement.paused || audioELement.currentTime <= 0) {
     audioELement.play();
     changePlayButtonToPause();
     gif.style.opacity = 1;
+    // Update the play icon of the currently playing song
+    const songItemPlays = document.querySelectorAll('.songItemPlay');
+    for (let i = 0; i < songItemPlays.length; i++) {
+      if (i === songIndex) {
+        songItemPlays[i].classList.remove('fa-play');
+        songItemPlays[i].classList.add('fa-pause');
+      }
+    }
   } else {
     audioELement.pause();
     changePauseButtonToPlay();
     gif.style.opacity = 0;
+    // Update the pause icon of the currently playing song
+    const songItemPlays = document.querySelectorAll('.songItemPlay');
+    for (let i = 0; i < songItemPlays.length; i++) {
+      if (i === songIndex) {
+        songItemPlays[i].classList.remove('fa-pause');
+        songItemPlays[i].classList.add('fa-play');
+      }
+    }
   }
 });
+
+
 
 //Listen to Event
 audioELement.addEventListener('timeupdate', ()=> {
@@ -68,38 +85,47 @@ myProgressBar.addEventListener('change', ()=>{
 
 })
 
-const makeAllPlays = ()=>{
-    Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
-        element.classList.remove('fa-solid', 'fa-pause');
-        element.classList.add('fa-solid', 'fa-play');
-    })
-}
+const makeAllPlays = (currentSongIndex) => {
+  Array.from(document.getElementsByClassName('songItemPlay')).forEach((element, i) => {
+    if (i !== currentSongIndex) {
+      element.classList.remove('fa-solid', 'fa-pause');
+      element.classList.add('fa-solid', 'fa-play');
+    }
+  });
+};
 
-/*Here, we are converting all the elements with the class name "songItemPlay" into an array using Array.from().
-This allows us to loop through these elements using the
-forEach() method to attach an event listener to each of them.
-Using Array.from() in these cases allows the program to work with the DOM elements conveniently as arrays,
-making it easier to perform operations on them using array methods.*/
-Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) =>{
-    element.addEventListener('click', (e)=>{
-        makeAllPlays();
-        songIndex = parseInt(e.target.id);
 
-        //e.target: This refers to the element that triggered the click event, 
-        //in this case, the element that was clicked.
-        e.target.classList.remove('fa-solid', 'fa-play');
-        e.target.classList.add('fa-solid', 'fa-pause');
-        masterSongName.innerText = songs[songIndex].songName;
-        audioELement.src = `songs/${songIndex+1}.mp3`;
-        gif.style.opacity = 1;
-        audioELement.currentTime = 0;
-        audioELement.play();
-    masterPlay.classList.remove('fa-solid', 'fa-play');
-    masterPlay.classList.add('fa-solid', 'fa-pause'); 
 
-    })
-})
-/* */
+Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+  element.addEventListener('click', (e) => {
+    songIndex = parseInt(e.target.id);
+
+    // Toggle play and pause icons using classList.contains()
+    if (e.target.classList.contains('fa-play')) {
+      e.target.classList.remove('fa-play');
+      e.target.classList.add('fa-pause');
+      masterPlay.classList.remove('fa-play');
+      masterPlay.classList.add('fa-pause');
+      audioELement.src = `songs/${songIndex + 1}.mp3`;
+      audioELement.currentTime = 0;
+      audioELement.play();
+      gif.style.opacity = 1;
+      masterSongName.innerText = songs[songIndex].songName;
+    } 
+    else if (e.target.classList.contains('fa-pause')) {
+      e.target.classList.remove('fa-pause');
+      e.target.classList.add('fa-play');
+      masterPlay.classList.remove('fa-pause');
+      masterPlay.classList.add('fa-play');
+      audioELement.pause();
+      gif.style.opacity = 0;
+    }
+
+    makeAllPlays(songIndex);
+  });
+});
+
+
 
 
 document.getElementById('next').addEventListener('click', ()=> {
@@ -133,6 +159,11 @@ document.getElementById('previous').addEventListener('click', ()=> {
     masterPlay.classList.add('fa-solid', 'fa-pause'); 
 
 })
+
+
+
+
+
 
 
 
