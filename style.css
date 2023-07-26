@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&family=Ubuntu&family=Varela+Round&display=swap");
+
+body {
+  background-color: antiquewhite;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  height: 65px;
+  background-color: #0a0a0a;
+}
+nav ul li {
+  padding: 0 12px;
+}
+.brand img {
+  width: 44px;
+  padding: 0 8px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+.container {
+  min-height: 72vh;
+  background-color: black;
+  color: white;
+  font-family: "Varela Round", sans-serif;
+  display: flex;
+  margin: 23px auto;
+  width: 70%;
+  border-radius: 12px;
+  padding: 34px;
+  background-image: url(bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bottom {
+  position: sticky;
+  height: 130px;
+  background-color: rgb(26, 25, 25);
+  bottom: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: aliceblue;
+}
+
+#myProgressBar {
+  text-align: center;
+  width: 80vw;
+  cursor: pointer;
+}
+
+.icons {
+  margin-top: 14px;
+  color: whitesmoke;
+  font-size: 25px;
+}
+.fa-solid.fa-backward-step {
+  font-size: 27px;
+}
+.icons i {
+  cursor: pointer;
+}
+
+.songItemcontainer {
+  margin-top: 74px;
+}
+
+.songItem {
+  height: 50px;
+  display: flex;
+  background-color: antiquewhite;
+  color: #0a0a0a;
+  margin: 12px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 34px;
+}
+.songItem img {
+  width: 47px;
+  margin: 0px 23px;
+  border-radius: 30px;
+}
+
+.timestamp {
+  margin: 0 23px;
+}
+.timestamp i {
+  cursor: pointer;
+}
+
+.songInfo {
+  position: absolute;
+  left: 9.4vw;
+  font-family: "Varela Round", sans-serif;
+}
+
+.songInfo img {
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+}
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #ebf7ff;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    margin-top: -12px;
+    /* Centers thumb on the track */
+
+    /*custom styles*/
+    background-color: #58e63bf5;
+    height: 1.6rem;
+    width: 1rem;
+    /* Add border-radius to create round edges */
+      border-radius: 0.3rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    border: 1px solid #69d1a1ee;
+    outline: 3px solid rgb(116, 107, 247);
+    outline-offset: 0.125rem;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+  background-color: #053a5f;
+  border-radius: 0.5rem;
+  height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  /*Removes extra border that FF applies*/
+  border-radius: 0;
+  /*Removes default border-radius that FF applies*/
+
+  /*custom styles*/
+  background-color: #5cd5eb;
+  height: 2rem;
+  width: 1rem;
+  /* Add border-radius to create round edges */
+    border-radius: 0.3rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  border: 1px solid #053a5f;
+  outline: 3px solid #053a5f;
+  outline-offset: 0.125rem;
+}
